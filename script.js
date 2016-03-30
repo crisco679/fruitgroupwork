@@ -2,27 +2,32 @@ $(function(){
 
 //budget information
 var budget = 100;
-$(".budgetPrice").text(budget);
 
+// fruit count
 var numApple = 0;
 var numOrange = 0;
 var numBanana = 0;
 var numGrape = 0;
+
 //fruit information
 var costApple =70;
 var costBanana =85;
 var costOrange =65;
 var costGrape =55;
 
+// purchased fruit
 var appleArray = [];
 var bananaArray = [];
 var orangeArray = [];
 var grapeArray = [];
 
-//click behavior
+//click behavior Apple
 $(".buyApple").on("click", function(event){
 	event.preventDefault();
-	budget -= (costApple / 100);
+	budget -= (costApple / 100).toFixed(2);
+	if(budget < 0){
+		budget = 0;
+	}
 	numApple ++;
 	$(".budgetPrice").text(budget);
 	$(".appleInv").text(" " + numApple);
@@ -31,14 +36,18 @@ $(".buyApple").on("click", function(event){
 	for(var i = 0; i < appleArray.length; i++){
 		count = count + appleArray[i];
 	}
-	var avgApple = (count / appleArray.length) / 100;
+	var avgApple = ((count / appleArray.length) / 100).toFixed(2);
 	$(".averageApple").text(" " + avgApple);
 	console.log(avgApple);
-})
 
+})
+//click behavior Orange
 $(".buyOrange").on("click", function(event){
 	event.preventDefault();
 	budget -= (costOrange / 100);
+	if(budget < 0){
+		budget = 0;
+	}
 	numOrange ++;
 	$(".budgetPrice").text(budget);
 	$(".orangeInv").text(" " + numOrange);
@@ -47,13 +56,18 @@ $(".buyOrange").on("click", function(event){
 	for(var i = 0; i < orangeArray.length; i++){
 		count = count + orangeArray[i];
 	}
-	var avgOrange = (count / orangeArray.length) / 100;
+	var avgOrange = ((count / orangeArray.length) / 100).toFixed(2);
 	$(".averageOrange").text(" " + avgOrange);
 	console.log(avgOrange);
+
 })
+//click behavior Banana
 $(".buyBanana").on("click", function(event){
 	event.preventDefault();
 	budget -= (costBanana / 100);
+	if(budget < 0){
+		budget = 0;
+	}
 	numBanana ++;
 	$(".budgetPrice").text(budget);
 	$(".bananaInv").text(" " + numBanana);
@@ -62,13 +76,18 @@ $(".buyBanana").on("click", function(event){
 	for(var i = 0; i < bananaArray.length; i++){
 		count = count + bananaArray[i];
 	}
-	var avgBanana = (count / bananaArray.length) / 100;
+	var avgBanana = ((count / bananaArray.length) / 100).toFixed(2);
 	$(".averageBanana").text(" " + avgBanana);
 	console.log(avgBanana);
+
 })
+//click behavior Grape
 $(".buyGrape").on("click", function(event){
 	event.preventDefault();
 	budget -= (costGrape / 100);
+	if(budget < 0){
+		budget = 0;
+	}
 	numGrape ++;
 	$(".budgetPrice").text(budget);
 	$(".grapeInv").text(" " + numGrape);
@@ -77,12 +96,13 @@ $(".buyGrape").on("click", function(event){
 	for(var i = 0; i < grapeArray.length; i++){
 		count = count + grapeArray[i];
 	}
-	var avgGrape = (count / grapeArray.length) / 100;
+	var avgGrape = ((count / grapeArray.length) / 100).toFixed(2);
 	$(".averageGrape").text(" " + avgGrape);
 	console.log(avgGrape);
+
 })
 
-
+// Price generator every 15 seconds
 setInterval(function(fruit){
   costApple = costApple + randomNumber(-50,50);
 	costBanana = costBanana + randomNumber(-50,50);
@@ -108,11 +128,12 @@ costGrape = 50;
 }else if(costGrape > 999){
 costGrape = 999;
 }
+// $(".applePrice").text((costApple / 100) * 100 / 100);
 $(".applePrice").text(costApple / 100);
 $(".bananaPrice").text(costBanana / 100);
 $(".orangePrice").text(costOrange / 100);
 $(".grapePrice").text(costGrape / 100);
-},3000)
+},15000)
 
 
 
@@ -120,20 +141,9 @@ $(".grapePrice").text(costGrape / 100);
 
 
 });
+
 //Put only whole numbers in randomNumber(-50,50)
 randomNumber(-50, 50);
 function randomNumber(min, max) {
 	return Math.floor(Math.random() * (1 + max - min) + min);
 }
-//This is an example setInterval function
-//setInterval(function(){alert("Hello");},3000);
-
-
-
-//figure out how to make it work once
-
-//figure out how to put it into setInterval function
-// console.log("Apple before function:" + costApple);
-// console.log("Banana before function:" + costBanana);
-// console.log("Orange before function:" + costOrange);
-// console.log("Grape before function:" + costGrape);
